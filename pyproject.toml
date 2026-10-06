@@ -1,0 +1,43 @@
+[project]
+name = "log-c2-030"
+version = "0.1.0"
+description = "RealtimeShipmentTrackingAgent — AgentCore Template"
+requires-python = ">=3.11"
+dependencies = [
+    "agenticstar-agentcore[marketplace,openai]==1.0.3",]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.1.1",
+    "pytest-cov==5.0.0",
+    "pytest-asyncio==0.23.6",
+    "ruff==0.4.4",
+    "mypy==1.10.0",
+]
+
+[build-system]
+requires = ["setuptools==68.2.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+# The distributed framework wheel ships no type information, so every symbol
+# imported from it resolves to Any. Without these two settings a strict run
+# reports the same missing-stubs cause once per import and once per subclass.
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+module = ["framework.*", "shared.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# AgentState resolves to Any for the same reason, which makes every field of a
+# TypedDict deriving from it an invalid type. One cause, one suppression —
+# annotating the individual fields would not address it.
+module = ["src.schemas.state"]
+disable_error_code = ["valid-type"]

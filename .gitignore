@@ -1,0 +1,21 @@
+# Distributed dev-reference files — not deliverables; intentionally untracked.
+CLAUDE.md
+security_rules/
+
+# SDK migration 2026-06-12: ci_stubs/ removed — framework.* now ships in the installed
+# agenticstar-agentcore SDK wheel. Keep ignored so it can't be re-committed.
+ci_stubs/
+
+# Python build / cache artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
